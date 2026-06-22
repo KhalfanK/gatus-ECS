@@ -1,4 +1,3 @@
-
 FROM golang:alpine AS builder
 RUN apk --update add ca-certificates
 WORKDIR /app
