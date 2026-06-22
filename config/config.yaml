@@ -1,0 +1,13 @@
+endpoints:
+  - name: website
+    url: https://google.com
+    interval: 60s
+    conditions:
+      - "[STATUS] == 200"
+      - "[RESPONSE_TIME] < 1000"
+  - name: personal website
+    url: https://kkhalfan.com
+    interval: 60s
+    conditions:
+      - "[STATUS] == 200"
+      - "[RESPONSE_TIME] < 1000"
