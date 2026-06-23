@@ -12,8 +12,7 @@
 crash.log
 crash.*.log
 
-*.tfvars
-*.tfvars.json
+
 *.auto.tfvars
 *.auto.tfvars.json
 
