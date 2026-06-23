@@ -1,5 +1,5 @@
 # VPC and Subnets
-resource "aws_vpc" "vpc" {
+resource "aws_vpc" "main" {
   cidr_block       = var.vpc_cidr
   instance_tenancy = "default"
 }
@@ -7,7 +7,7 @@ resource "aws_vpc" "vpc" {
 resource "aws_subnet" "public" {
   for_each = var.public_subnets
 
-  vpc_id                  = aws_vpc.vpc.id
+  vpc_id                  = aws_vpc.main.id
   cidr_block              = each.value.cidr
   availability_zone       = each.value.az
   map_public_ip_on_launch = true
@@ -20,7 +20,7 @@ resource "aws_subnet" "public" {
 resource "aws_subnet" "private" {
   for_each = var.private_subnets
 
-  vpc_id                  = aws_vpc.vpc.id
+  vpc_id                  = aws_vpc.main.id
   cidr_block              = each.value.cidr
   availability_zone       = each.value.az
 
@@ -30,9 +30,8 @@ resource "aws_subnet" "private" {
 }
 
 # Internet & NAT Gateways
-
 resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.vpc.id
+  vpc_id = aws_vpc.main.id
 
   tags = {
     Name = "igw"
@@ -52,10 +51,9 @@ resource "aws_nat_gateway" "natgw" {
   }
 }
 
-# Route Tables
-
+# Route Tables & subnet associations
 resource "aws_route_table" "public_route" {
-  vpc_id = aws_vpc.vpc.id
+  vpc_id = aws_vpc.main.id
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -64,7 +62,7 @@ resource "aws_route_table" "public_route" {
 }
 
 resource "aws_route_table" "private_route" {
-  vpc_id = aws_vpc.vpc.id
+  vpc_id = aws_vpc.main.id
 
   route {
     cidr_block = "0.0.0.0/0"
