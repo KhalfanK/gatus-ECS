@@ -1,5 +1,12 @@
-ui:
-  default-sort: "name"
+alerting:
+  aws-ses:
+    region: "eu-west-2"
+    from: "khalfan.k@outlook.com"
+    to: "khalfan.k@outlook.com"
+    default-alert:
+      failure-threshold: 3
+      success-threshold: 3
+      send-on-resolved: true
 
 endpoints:
   - name: gatus-self
@@ -44,9 +51,11 @@ endpoints:
 
   - name: demo-deliberate-failure
     group: core
-    url: "https://kkhalfan.com/this-path-does-not-exist"
+    url: "https://demo.kkhalfan.com/"
     interval: 10s
     conditions:
       - "[STATUS] == 200"
+    alerts:
+      - type: aws-ses
 
 

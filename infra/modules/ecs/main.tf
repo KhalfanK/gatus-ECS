@@ -15,6 +15,7 @@ resource "aws_ecs_task_definition" "gatus_task_definition" {
   memory                   = "512"
   
   execution_role_arn       = var.gatus_exec_role_arn
+  task_role_arn            = var.gatus_task_role_arn
 
   container_definitions = jsonencode([
     {

@@ -30,6 +30,7 @@ module "ecs" {
   source = "./modules/ecs"
 
   gatus_exec_role_arn  = module.iam.gatus_exec_role_arn
+  gatus_task_role_arn  = module.iam.gatus_task_role_arn
   ecr_repo_url         = module.ecr.repo_url
   alb_target_group_arn = module.alb_acm.alb_target_group_arn
   private_subnet_id    = module.networking.private_subnet_id

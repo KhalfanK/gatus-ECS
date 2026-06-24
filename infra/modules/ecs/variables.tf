@@ -2,6 +2,10 @@ variable "gatus_exec_role_arn" {
   type = string
 }
 
+variable "gatus_task_role_arn" {
+  type = string
+}
+
 variable "aws_region" {
   type = string
 }
