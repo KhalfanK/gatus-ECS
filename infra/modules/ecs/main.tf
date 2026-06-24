@@ -19,7 +19,7 @@ resource "aws_ecs_task_definition" "gatus_task_definition" {
   container_definitions = jsonencode([
     {
       name      = "gatus"
-      image     = "${var.ecr_repo_url}:latest" # Points to your ECR URL
+      image     = "${var.ecr_repo_url}:latest"
       essential = true
       
       portMappings = [

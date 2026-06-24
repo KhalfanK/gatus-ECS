@@ -9,10 +9,6 @@ resource "aws_ecr_repository" "gatus" {
   encryption_configuration {
     encryption_type = "AES256"
   }
-
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "aws_ecr_lifecycle_policy" "cleanup" {

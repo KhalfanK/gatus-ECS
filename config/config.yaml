@@ -1,13 +1,52 @@
+ui:
+  default-sort: "name"
+
 endpoints:
-  - name: website
-    url: https://google.com
-    interval: 60s
-    conditions:
-      - "[STATUS] == 200"
-      - "[RESPONSE_TIME] < 1000"
-  - name: personal website
+  - name: gatus-self
+    group: core
     url: https://kkhalfan.com
     interval: 60s
     conditions:
       - "[STATUS] == 200"
       - "[RESPONSE_TIME] < 1000"
+
+  - name: aws-health-dashboard
+    group: aws-dependencies
+    url: "https://health.aws.amazon.com/health/status"
+    interval: 5m
+    conditions:
+      - "[STATUS] == 200"
+
+  - name: acm-cert-expiry
+    group: core
+    url: "https://kkhalfan.com"
+    interval: 1h
+    conditions:
+      - "[CERTIFICATE_EXPIRATION] > 720h"
+
+  - name: dns-resolution
+    group: core
+    url: "8.8.8.8"
+    interval: 5m
+    dns:
+      query-name: "kkhalfan.com"
+      query-type: "A"
+    conditions:
+      - "[DNS_RCODE] == NOERROR"
+
+  - name: github-api
+    group: external-demo
+    url: "https://api.github.com"
+    interval: 5m
+    conditions:
+      - "[STATUS] == 200"
+      - "[BODY].current_user_url != null"
+
+  - name: demo-deliberate-failure
+    group: core
+    url: "https://kkhalfan.com/this-path-does-not-exist"
+    interval: 10s
+    conditions:
+      - "[STATUS] == 200"
+
+

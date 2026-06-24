@@ -16,7 +16,7 @@ resource "aws_alb_target_group" "main" {
   target_type = "ip" 
 
   health_check {
-    path                = "/" # Or whatever health check path Gatus exposes
+    path                = "/health" 
     protocol            = "HTTP"
     port                = "8080"
     matcher             = "200"
