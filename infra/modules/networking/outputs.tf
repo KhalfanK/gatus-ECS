@@ -15,3 +15,10 @@ output "public_subnet_id" {
   ]
 }
 
+output "private_subnet_id" {
+  description = "id of public subnets"
+  value = [
+    for subnet in aws_subnet.private : subnet.id
+  ]
+}
+

@@ -8,12 +8,24 @@ resource "aws_acm_certificate" "main" {
 }
 
 resource "aws_alb_target_group" "main" {
-  name     = "tf-instance-tg"
-  port     = 80
-  protocol = "HTTP"
-  vpc_id   = var.vpc_id
-}
+  name        = "gatus-target-group"
+  port        = 8080
+  protocol    = "HTTP"
+  vpc_id      = var.vpc_id
+  
+  target_type = "ip" 
 
+  health_check {
+    path                = "/" # Or whatever health check path Gatus exposes
+    protocol            = "HTTP"
+    port                = "8080"
+    matcher             = "200"
+    interval            = 30
+    timeout             = 5
+    healthy_threshold   = 3
+    unhealthy_threshold = 3
+  }
+}
 
 resource "aws_alb" "main" {
   name               = "alb-tf"

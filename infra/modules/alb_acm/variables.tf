@@ -1,5 +1,5 @@
 variable "public_subnet_id" {
-    type = list(string)
+  type = list(string)
 }
 
 variable "vpc_id" {
