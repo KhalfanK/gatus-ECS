@@ -34,5 +34,5 @@ resource "cloudflare_record" "gatus_traffic" {
   value   = var.alb_dns_name    
   type    = "CNAME"
   ttl     = 1                   
-  proxied = false                
+  proxied = true                
 }
