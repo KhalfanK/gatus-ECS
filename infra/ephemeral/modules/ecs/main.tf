@@ -1,10 +1,17 @@
 resource "aws_ecs_cluster" "gatus_cluster" {
-  name = "gatus_cluster"
+  name = "${var.name_prefix}-cluster"
+  
+  tags = merge(local.module_tags, {
+    Name = "${var.name_prefix}-alb"
+  })
 }
 
 resource "aws_cloudwatch_log_group" "gatus_logs" {
   name              = "/ecs/gatus"
-  retention_in_days = 7
+  retention_in_days = 1
+  tags = merge(local.module_tags, {
+    Name = "${var.name_prefix}-alb"
+  })
 }
 
 resource "aws_ecs_task_definition" "gatus_task_definition" {
@@ -19,7 +26,7 @@ resource "aws_ecs_task_definition" "gatus_task_definition" {
   container_definitions = jsonencode([
     {
       name      = "gatus"
-      image     = "${var.ecr_repo_url}:latest" # Points to your ECR URL
+      image     = "${var.ecr_repo_url}:${var.ecr_image_tag}"
       essential = true
       
       portMappings = [
@@ -34,7 +41,7 @@ resource "aws_ecs_task_definition" "gatus_task_definition" {
         logDriver = "awslogs"
         options = {
           "awslogs-group"         = aws_cloudwatch_log_group.gatus_logs.name
-          "awslogs-region"        = var.aws_region
+          "awslogs-region"        = "eu-west-2"
           "awslogs-stream-prefix" = "gatus"
         }
       }
@@ -48,10 +55,10 @@ resource "aws_ecs_task_definition" "gatus_task_definition" {
 }
 
 resource "aws_ecs_service" "gatus" {
-  name            = "gatus"
+  name            = "${var.name_prefix}-service"
   cluster         = aws_ecs_cluster.gatus_cluster.id
   task_definition = aws_ecs_task_definition.gatus_task_definition.arn
-  desired_count   = 2
+  desired_count   = 1
   launch_type     = "FARGATE"
 
 
@@ -62,7 +69,7 @@ resource "aws_ecs_service" "gatus" {
   }
 
   network_configuration {
-    subnets          = var.private_subnet_id
+    subnets          = var.private_subnet_ids
     security_groups  = [var.gatus_task_sg_id] 
     assign_public_ip = false                
   }

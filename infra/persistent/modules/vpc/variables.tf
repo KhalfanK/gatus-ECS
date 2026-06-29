@@ -1,5 +1,5 @@
-variable "aws_region" {
-  type = string
+variable "name_prefix" {
+  type        = string
 }
 
 variable "vpc_cidr" {
@@ -7,7 +7,6 @@ variable "vpc_cidr" {
 }
 
 variable "public_subnets" {
-  description = "Map of public subnets"
   type = map(object({
     cidr = string
     az   = string
@@ -15,7 +14,6 @@ variable "public_subnets" {
 }
 
 variable "private_subnets" {
-  description = "Map of private subnets"
   type = map(object({
     cidr = string
     az   = string
