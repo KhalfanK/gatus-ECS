@@ -6,7 +6,7 @@ resource "aws_alb_target_group" "main" {
   target_type = "ip" 
 
   health_check {
-    path                = "/healthz"
+    path                = "/"
     protocol            = "HTTP"
     port                = "8080"
     matcher             = "200"

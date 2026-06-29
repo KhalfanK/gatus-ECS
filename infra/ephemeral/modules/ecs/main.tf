@@ -58,8 +58,9 @@ resource "aws_ecs_service" "gatus" {
   name            = "${var.name_prefix}-service"
   cluster         = aws_ecs_cluster.gatus_cluster.id
   task_definition = aws_ecs_task_definition.gatus_task_definition.arn
-  desired_count   = 1
+  desired_count   = 2
   launch_type     = "FARGATE"
+  health_check_grace_period_seconds = 60
 
 
   load_balancer {

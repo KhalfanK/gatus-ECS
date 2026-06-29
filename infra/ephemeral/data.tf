@@ -52,7 +52,7 @@ data "aws_ecr_repository" "gatus" {
 }
 
 data "aws_acm_certificate" "cert" {
-  domain   = "kkhalfan.com"
+  domain   = "tm.kkhalfan.com"
   statuses = ["ISSUED"]
 }
 

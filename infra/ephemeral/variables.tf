@@ -7,7 +7,7 @@ variable "environment" {
 }
 
 variable "ecr_image_tag" {
-  type        = string
+  type = string
 }
 
 variable "aws_region" {
