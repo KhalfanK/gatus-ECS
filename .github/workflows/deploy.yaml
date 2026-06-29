@@ -3,6 +3,7 @@ name: Build and Push to ECR
 on:
   push:
     branches: [ "main" ]
+  workflow_dispatch:
 
 permissions:
   id-token: write
@@ -13,7 +14,7 @@ env:
   ECR_REPOSITORY: gatus
 
 jobs:
-  deploy:
+  build-and-push:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Code
