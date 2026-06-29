@@ -11,7 +11,7 @@ alerting:
 endpoints:
   - name: gatus-self
     group: core
-    url: https://kkhalfan.com
+    url: https://tm.kkhalfan.com
     interval: 60s
     conditions:
       - "[STATUS] == 200"
@@ -26,7 +26,7 @@ endpoints:
 
   - name: acm-cert-expiry
     group: core
-    url: "https://kkhalfan.com"
+    url: "https://tm.kkhalfan.com"
     interval: 1h
     conditions:
       - "[CERTIFICATE_EXPIRATION] > 720h"
