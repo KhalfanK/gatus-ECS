@@ -1,11 +1,8 @@
 FROM golang:alpine AS builder
 RUN apk --update add ca-certificates
 WORKDIR /app
-
-COPY app/go.mod app/go.sum ./
-RUN go mod download
-
-COPY app/*.go ./
+COPY app/ ./
+RUN go mod tidy -diff
 RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags="-w -s" -o gatus .
 
 FROM scratch
