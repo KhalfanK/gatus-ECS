@@ -1,13 +1,3 @@
-data "terraform_remote_state" "persistent" {
-  backend = "s3"
-
-  config = {
-    bucket = "terraform-state-gatus"
-    key    = "persistent/terraform.tfstate"
-    region = "eu-west-2"
-  }
-}
-
 data "aws_vpc" "main" {
   filter {
     name   = "tag:Name"
