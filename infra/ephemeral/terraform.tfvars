@@ -1,3 +1,3 @@
-project = "gatus"
+project     = "gatus"
 environment = "dev"
-aws_region = "eu-west-2"
+aws_region  = "eu-west-2"

@@ -1,6 +1,6 @@
 resource "aws_ecs_cluster" "gatus_cluster" {
   name = "${var.name_prefix}-cluster"
-  
+
   tags = merge(local.module_tags, {
     Name = "${var.name_prefix}-alb"
   })
@@ -20,15 +20,15 @@ resource "aws_ecs_task_definition" "gatus_task_definition" {
   network_mode             = "awsvpc"
   cpu                      = "256"
   memory                   = "512"
-  
-  execution_role_arn       = var.gatus_exec_role_arn
+
+  execution_role_arn = var.gatus_exec_role_arn
 
   container_definitions = jsonencode([
     {
       name      = "gatus"
       image     = "${var.ecr_repo_url}:${var.ecr_image_tag}"
       essential = true
-      
+
       portMappings = [
         {
           containerPort = 8080
@@ -55,11 +55,11 @@ resource "aws_ecs_task_definition" "gatus_task_definition" {
 }
 
 resource "aws_ecs_service" "gatus" {
-  name            = "${var.name_prefix}-service"
-  cluster         = aws_ecs_cluster.gatus_cluster.id
-  task_definition = aws_ecs_task_definition.gatus_task_definition.arn
-  desired_count   = 2
-  launch_type     = "FARGATE"
+  name                              = "${var.name_prefix}-service"
+  cluster                           = aws_ecs_cluster.gatus_cluster.id
+  task_definition                   = aws_ecs_task_definition.gatus_task_definition.arn
+  desired_count                     = 2
+  launch_type                       = "FARGATE"
   health_check_grace_period_seconds = 60
 
 
@@ -71,7 +71,7 @@ resource "aws_ecs_service" "gatus" {
 
   network_configuration {
     subnets          = var.private_subnet_ids
-    security_groups  = [var.gatus_task_sg_id] 
-    assign_public_ip = false                
+    security_groups  = [var.gatus_task_sg_id]
+    assign_public_ip = false
   }
 }

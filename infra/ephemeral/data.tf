@@ -3,8 +3,8 @@ data "terraform_remote_state" "persistent" {
 
   config = {
     bucket = "terraform-state-gatus"
-    key    = "persistent/terraform.tfstate" 
-    region = "eu-west-2"                   
+    key    = "persistent/terraform.tfstate"
+    region = "eu-west-2"
   }
 }
 
@@ -33,7 +33,7 @@ data "aws_subnets" "private" {
   }
   filter {
     name   = "tag:Name"
-    values = ["*private*"] 
+    values = ["*private*"]
   }
 }
 

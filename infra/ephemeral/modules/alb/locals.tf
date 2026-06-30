@@ -1,6 +1,6 @@
 locals {
   module_tags = {
-    Module    = "alb"
-    Layer     = "ingress"
+    Module = "alb"
+    Layer  = "ingress"
   }
 }
