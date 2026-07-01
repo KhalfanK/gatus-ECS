@@ -56,8 +56,7 @@ The infrastructure is split into two Terraform root modules: **persistent** for 
 
 GitHub Actions builds the Docker image, deploys infrastructure, updates ECS, and performs health check on domain.
 
-![Successful Deployment](assets/Screenshot-2026-06-30-035026.png)
-
+![Successful Deployment](assets/pipeline_success.png)
 
 <br>
 
@@ -65,7 +64,7 @@ GitHub Actions builds the Docker image, deploys infrastructure, updates ECS, and
 
 The live Gatus dashboard served securely over HTTPS from ECS Fargate.
 
-![Running Application](assets/Screenshot-2026-06-30-035125.png)
+![Running Application](assets/deployment_success.png)
 ---
 
 ## Architecture
