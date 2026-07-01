@@ -1,6 +1,6 @@
 # Gatus on ECS Fargate <!-- omit from toc --> 
 
-![CI/CD](https://github.com/KhalfanK/gatus-ECS/actions/workflows/deploy.yml/badge.svg)(https://github.com/KhalfanK/gatus-ECS/actions/workflows/deploy.yml)
+[![CI/CD](https://github.com/KhalfanK/gatus-ECS/actions/workflows/deploy.yaml/badge.svg)](https://github.com/KhalfanK/gatus-ECS/actions/workflows/deploy.yaml)
 ![Terraform](https://img.shields.io/badge/Terraform-v1.15.6-7B42BC?logo=terraform&logoColor=white)
 ![AWS](https://img.shields.io/badge/AWS-ECS%20Fargate-FF9900?logo=amazonecs&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-multi--stage-2496ED?logo=docker&logoColor=white)
