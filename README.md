@@ -1,4 +1,4 @@
-# Gatus on ECS Fargate <!-- omit from toc --> 
+# Gatus on ECS Fargate 
 
 [![CI/CD](https://github.com/KhalfanK/gatus-ECS/actions/workflows/deploy.yaml/badge.svg)](https://github.com/KhalfanK/gatus-ECS/actions/workflows/deploy.yaml)
 ![Terraform](https://img.shields.io/badge/Terraform-v1.15.6-7B42BC?logo=terraform&logoColor=white)
@@ -17,7 +17,10 @@ This project demonstrates modern cloud engineering practices including Infrastru
 
 ## Contents
 
-- [Deploy Proof](#deploy-proof)
+- [Gatus on ECS Fargate](#gatus-on-ecs-fargate)
+  - [Contents](#contents)
+  - [Overview](#overview)
+  - [Deploy Proof](#deploy-proof)
   - [Architecture](#architecture)
   - [Technology Stack](#technology-stack)
   - [Repository Structure](#repository-structure)
@@ -27,10 +30,12 @@ This project demonstrates modern cloud engineering practices including Infrastru
     - [CI Owns the ECR Repository](#ci-owns-the-ecr-repository)
     - [Separate OIDC Roles for Build and Deployment](#separate-oidc-roles-for-build-and-deployment)
     - [IAM-Based SES Authentication](#iam-based-ses-authentication)
-- [Local Development](#local-development)
-- [Deployment](#deployment)
-- [Requirements](#requirements)
-- [Future Improvements](#future-improvements)
+  - [Local Development](#local-development)
+  - [Deployment](#deployment)
+  - [Requirements](#requirements)
+  - [Future Improvements](#future-improvements)
+
+
 
 ---
 
@@ -65,9 +70,12 @@ GitHub Actions builds the Docker image, deploys infrastructure, updates ECS, and
 The live Gatus dashboard served securely over HTTPS from ECS Fargate.
 
 ![Running Application](assets/deployment_success.png)
+
 ---
 
 ## Architecture
+
+![Architechture Diagram](assets/architecture_diagram.png)
 
 ---
 ## Technology Stack
@@ -235,7 +243,7 @@ Authenticate Amazon SES using the ECS Task Role instead of SMTP credentials.
 
 ---
 
-# Local Development
+## Local Development
 
 Clone the repo and build the image locally to test the Gatus container in isolation:
 
@@ -251,7 +259,7 @@ Then visit `http://localhost:8080` to see the Gatus dashboard.
 
 ---
 
-# Deployment
+## Deployment
 
 The full stack is provisioned via Terraform and deployed via GitHub Actions, manual `terraform apply` isn't really the intended path, but for reference, the persistent stack goes first:
 
@@ -269,17 +277,17 @@ In practice, the `deploy.yaml` workflow can be manually triggered, which builds 
 
 ---
 
-# Requirements
+## Requirements
 
 - [Docker](https://docs.docker.com/get-docker/) (20+)
 - [Terraform](https://developer.hashicorp.com/terraform/install) (>= 1.15.6)
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) (>=2.34.41), configured with credentials
 - An AWS account with permissions to create VPC/ECS/ALB/ACM/SES/ECR/IAM resources
 - A domain managed in Cloudflare (for DNS validation + the live record)
-- 
+
 ---
 
-# Future Improvements
+## Future Improvements
 
 Potential enhancements include:
 
