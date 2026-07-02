@@ -243,6 +243,23 @@ Authenticate Amazon SES using the ECS Task Role instead of SMTP credentials.
 
 ---
 
+## Single NAT Gateway (Cost Optimisation)
+
+**Decision** 
+
+One NAT Gateway shared across both AZs rather than one per AZ.
+
+**Why** 
+
+- Reduces cost during development
+- the project doesn't require multi-AZ NAT redundancy at this stage.
+  
+**Benefits** 
+
+- Lower running cost.
+
+---
+
 ## Local Development
 
 Clone the repo and build the image locally to test the Gatus container in isolation:
@@ -297,6 +314,7 @@ Potential enhancements include:
 * CloudWatch dashboards and alarms
 * WAF integration
 * Cost optimisation using ECS capacity providers
+* Add another NAT Gateway in second AZ, for High Availability
   
 ---
 
